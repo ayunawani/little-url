@@ -7,6 +7,7 @@ var bodyParser = require('body-parser')
 
 var routes = require('./routes/index')
 var url = require('./routes/url')
+var redirect = require('./routes/redirect')
 
 var app = express()
 
@@ -29,6 +30,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', routes)
+app.use('/:id', redirect)
 app.use('/new', url)
 
 // catch 404 and forward to error handler

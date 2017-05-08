@@ -2,6 +2,9 @@ var express = require('express')
 var router = express.Router()
 var Url = require('../models/Url')
 
+global.testDb = {}
+
+
 /* GET users listing. */
 router.get('/*', function (req, res, next) {
   let url = req.params[0]
@@ -11,6 +14,8 @@ router.get('/*', function (req, res, next) {
     original_url: url,
     short_url: `https://${host}/${id}`
   }
+
+  testDb[id] = url 
 
   // let urlObj = new Url({
   //   id: id,
