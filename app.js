@@ -11,11 +11,18 @@ var redirect = require('./routes/redirect')
 
 var app = express()
 
-var mongoose = require('mongoose')
-mongoose.Promise = global.Promise
-mongoose.connect('mongodb://admin:admin@ds133231.mlab.com:33231/little-url-db')
-  .then(() => console.log('connection successful'))
-  .catch((err) => console.log(err))
+// var mongoose = require('mongoose')
+var mongo = require('mongodb').MongoClient
+global.db = null
+mongo.connect('mongodb://admin:admin@ds133231.mlab.com:33231/little-url-db', (err, db) => {
+  global.db = db
+  console.log('connected')
+})
+
+// mongoose.Promise = global.Promise
+// mongoose.connect('mongodb://admin:admin@ds133231.mlab.com:33231/little-url-db')
+//   .then(() => console.log('connection successful'))
+//   .catch((err) => console.log(err))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
